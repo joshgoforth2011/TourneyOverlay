@@ -1,5 +1,5 @@
 // === CONFIG ====
-const API_URL = "https://script.google.com/macros/s/AKfycbwpG_Gx-QIbE11RzyK41zMBk5EGFicax8A3lrhrK5XyXGjFD-nQ1fmBP89Wg5GQHL6x/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbz05vXZDodj17tKOSoaGtsob0FJ4GRqh5i-Z_SHXDfiRnLhTIsTDHk4Xtn02RWFS29J/exec";
 const POLL_INTERVAL = 15000; // 15 seconds
 
 let prev = {};
@@ -71,3 +71,4 @@ async function fetchAndRender() {
 
 fetchAndRender();
 setInterval(fetchAndRender, POLL_INTERVAL);
+
