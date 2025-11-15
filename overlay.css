@@ -1,0 +1,135 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Side panel container */
+#side-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 380px;
+  height: 100vh;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, rgba(0,0,0,0.85), rgba(0,0,0,0.55));
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+#header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+#live-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff3b3b;
+  margin-right: 8px;
+  animation: pulse 1.2s infinite;
+}
+
+.title {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-size: 14px;
+}
+
+.subtitle {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* Table styling */
+#standings-container {
+  flex: 1;
+  overflow: hidden;
+}
+
+#standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+#standings-table th,
+#standings-table td {
+  padding: 4px 3px;
+  text-align: left;
+}
+
+#standings-table th {
+  opacity: 0.75;
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+}
+
+/* Row styles */
+#standings-table tbody tr:nth-child(odd) {
+  background: rgba(255,255,255,0.04);
+}
+
+.leader {
+  background: rgba(255,215,0,0.18);
+}
+
+/* Footer */
+#footer {
+  font-size: 10px;
+  opacity: 0.75;
+  margin-top: 6px;
+}
+
+/* === Animations === */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.4); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.9; }
+}
+
+.leader-change {
+  animation: leaderGlow 1.3s ease-out;
+}
+
+.rank-up {
+  animation: rankUp 0.7s ease-out;
+}
+
+.rank-down {
+  animation: rankDown 0.7s ease-out;
+}
+
+.new-fish {
+  animation: newFish 0.6s ease-out;
+}
+
+@keyframes leaderGlow {
+  0% { box-shadow: 0 0 0 rgba(255,215,0,0); }
+  40% { box-shadow: 0 0 18px rgba(255,215,0,1); }
+  100% { box-shadow: 0 0 0 rgba(255,215,0,0); }
+}
+
+@keyframes rankUp {
+  0% { transform: translateX(0); }
+  30% { transform: translateX(-12px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes rankDown {
+  0% { transform: translateX(0); }
+  30% { transform: translateX(12px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes newFish {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
