@@ -1,24 +1,39 @@
 // === CONFIG ====
-const API_URL = "https://script.google.com/macros/s/AKfycbz05vXZDodj17tKOSoaGtsob0FJ4GRqh5i-Z_SHXDfiRnLhTIsTDHk4Xtn02RWFS29J/exec";
-const POLL_INTERVAL = 15000; // 15 seconds
+const API_URL = "https://live.tourneyx.com/index.php?id=24980";
+const POLL_INTERVAL = 15000; // 15 sec
 
 let prev = {};
 let prevLeaderId = null;
 
-// Main polling loop
+// Fetch direct TourneyX public JSON
 async function fetchAndRender() {
   try {
-    const res = await fetch(API_URL);
-    const json = await res.json();
-    const standings = json.standings;
+    const res = await fetch(API_URL, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+
+    const standings = await res.json();   // JSON array!
 
     const tbody = document.getElementById("standings-body");
     tbody.innerHTML = "";
 
     let curr = {};
-    const newLeader = standings[0]?.id;
+    const newLeader = standings[0]?.user_id;
 
-    standings.forEach(row => {
+    standings.forEach((a, index) => {
+      const row = {
+        id: a.user_id,
+        rank: index + 1,
+        angler_name: a.angler_name,
+        fish_count: Number(a.fish_caught),
+        score: Number(a.total_fish_length),
+        last_submission: a.last_submission_time,
+        big_fish: Number(a.largest_fish)
+      };
+
       curr[row.id] = row;
 
       const tr = document.createElement("tr");
@@ -27,7 +42,7 @@ async function fetchAndRender() {
       const rankMovement = p ? (p.rank - row.rank) : 0;
       const fishMovement = p ? (row.fish_count - p.fish_count) : 0;
 
-      // Leader highlighting + animation
+      // Leader highlight
       if (row.id === newLeader) {
         tr.classList.add("leader");
         if (prevLeaderId && prevLeaderId !== newLeader) {
@@ -35,11 +50,11 @@ async function fetchAndRender() {
         }
       }
 
-      // Rank up/down animations
+      // Rank animations
       if (rankMovement > 0) tr.classList.add("rank-up");
       if (rankMovement < 0) tr.classList.add("rank-down");
 
-      // New fish animation
+      // New fish
       if (fishMovement > 0) tr.classList.add("new-fish");
 
       tr.innerHTML = `
@@ -53,10 +68,9 @@ async function fetchAndRender() {
 
       setTimeout(() => {
         tr.classList.remove("leader-change", "rank-up", "rank-down", "new-fish");
-      }, 1400);
+      }, 1500);
     });
 
-    // Update footer
     document.getElementById("last-updated").textContent =
       "Last updated: " + new Date().toLocaleTimeString();
 
@@ -64,11 +78,10 @@ async function fetchAndRender() {
     prevLeaderId = newLeader;
 
   } catch (err) {
-    console.error("Overlay error:", err);
-    document.getElementById("last-updated").textContent = "Error updating data";
+    document.getElementById("last-updated").textContent = "Error loading data";
+    console.error("Overlay fetch error:", err);
   }
 }
 
 fetchAndRender();
 setInterval(fetchAndRender, POLL_INTERVAL);
-
