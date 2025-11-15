@@ -34,17 +34,17 @@ html, body {
   border-radius: 50%;
   background: #ff3b3b;
   margin-right: 8px;
-  animation: pulse 1.2s infinite;
+  animation: pulse 1.5s infinite;
 }
 
 .title {
   font-weight: 700;
   letter-spacing: 0.08em;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .subtitle {
-  font-size: 11px;
+  font-size: 14px;
   opacity: 0.7;
 }
 
@@ -57,7 +57,7 @@ html, body {
 #standings-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 #standings-table th,
@@ -133,3 +133,4 @@ html, body {
   35% { transform: scale(1.06); }
   100% { transform: scale(1); }
 }
+
