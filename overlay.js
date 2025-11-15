@@ -1,5 +1,5 @@
 // === CONFIG ====
-const API_URL = "https://script.google.com/macros/s/AKfycbxOQW4y47-fTB8wAHb7UNTaXI4yfGNVe5_yHeGT53S-BY9Pj2uDkCbSXgEKR2nY834w/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwpG_Gx-QIbE11RzyK41zMBk5EGFicax8A3lrhrK5XyXGjFD-nQ1fmBP89Wg5GQHL6x/exec";
 const POLL_INTERVAL = 15000; // 15 seconds
 
 let prev = {};
